@@ -1,6 +1,19 @@
-package com.example.mypetcafeui;
+package com.example.mypetcafeui.drawer;
 
 // Drawer base for for all activities extending it
+import com.example.mypetcafeui.ActivityBlog;
+import com.example.mypetcafeui.ActivityBlogPost;
+import com.example.mypetcafeui.ActivityFindFriends;
+import com.example.mypetcafeui.ActivityMyFriends;
+import com.example.mypetcafeui.ActivityProfile;
+import com.example.mypetcafeui.R;
+import com.example.mypetcafeui.R.anim;
+import com.example.mypetcafeui.R.drawable;
+import com.example.mypetcafeui.R.id;
+import com.example.mypetcafeui.R.layout;
+import com.example.mypetcafeui.R.menu;
+import com.example.mypetcafeui.R.string;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -19,6 +32,12 @@ import android.widget.ListView;
 @SuppressWarnings("deprecation")
 public class ActivityBase extends Activity {
 
+	private final int ACTIVITY_BLOG = 0;
+	private final int ACTIVITY_PROFILE = 1;
+	private final int ACTIVITY_POSTBLOG = 2;
+	private final int ACTIVITY_MYFRIENDS = 3;
+	private final int ACTIVITY_FINDFRIENDS = 4;
+	
 	public String[] mDrawerTitles;
 	public DrawerLayout mDrawerLayout;
 	public ListView mDrawerList;
@@ -36,13 +55,13 @@ public class ActivityBase extends Activity {
 		mTitle = "test";
 
 		mDrawerTitles = new String[] { "Blogs", "Profile", "Post Blog",
-				"Find Friends", "My Friends" };
+				"My Friends", "Find Friends" };
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
 		// Set the adapter for the list view
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.drawer_list_item, mDrawerTitles));
+				R.layout.listitem_drawer, mDrawerTitles));
 		// Set the list's click listener
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -118,25 +137,25 @@ public class ActivityBase extends Activity {
 	private void selectItem(int position) {
 		// Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
 		Intent intent = null;
-		switch (position) {
-		case 0:
-			intent = new Intent(this, ActivityBlog.class);
-			break;
-		case 1:
-			intent = new Intent(this, ActivityProfile.class);
-			break;
-		case 2:
-			intent = new Intent(this, ActivityBlogPost.class);
-			break;
-		case 3:
-			intent = new Intent(this, ActivityBlog.class);
-			break;
-		case 4:
-			intent = new Intent(this, ActivityBlog.class);
-			break;
-		default:
-			break;
-		}
+    	switch(position){
+    	case ACTIVITY_BLOG:
+    		intent = new Intent(this, ActivityBlog.class);
+    		break;
+    	case ACTIVITY_PROFILE:
+    		intent = new Intent(this, ActivityProfile.class);
+    		break;
+    	case ACTIVITY_POSTBLOG:
+    		intent = new Intent(this, ActivityBlogPost.class);
+    		break;
+    	case ACTIVITY_MYFRIENDS:
+    		intent = new Intent(this, ActivityMyFriends.class);
+    		break;
+    	case ACTIVITY_FINDFRIENDS:
+    		intent = new Intent(this, ActivityFindFriends.class);
+    		break;
+    	default:
+    		break;
+    	}
 		startActivity(intent);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 

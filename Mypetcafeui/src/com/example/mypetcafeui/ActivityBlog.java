@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.example.mypetcafeui.adapter.TabsPagerAdapter;
+import com.example.mypetcafeui.drawer.ActivityBaseTab;
 
 @SuppressWarnings("deprecation")
 public class ActivityBlog extends ActivityBaseTab implements

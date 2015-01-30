@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.mypetcafeui.FragmentBlog1;
-import com.example.mypetcafeui.FragmentBlog2;
-import com.example.mypetcafeui.FragmentBlog3;
+import com.example.mypetcafeui.blog.FragmentBlog1;
+import com.example.mypetcafeui.blog.FragmentBlog2;
+import com.example.mypetcafeui.blog.FragmentBlog3;
  
 public class TabsPagerAdapter extends FragmentPagerAdapter {
  
