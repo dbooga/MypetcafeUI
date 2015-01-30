@@ -1,20 +1,6 @@
 package com.example.mypetcafeui.drawer;
 
 //Drawer base for for all fragment activities extending it
-import com.example.mypetcafeui.ActivityBlog;
-import com.example.mypetcafeui.ActivityBlogPost;
-import com.example.mypetcafeui.ActivityFindFriends;
-import com.example.mypetcafeui.ActivityMyFriends;
-import com.example.mypetcafeui.ActivityProfile;
-import com.example.mypetcafeui.R;
-import com.example.mypetcafeui.R.anim;
-import com.example.mypetcafeui.R.drawable;
-import com.example.mypetcafeui.R.id;
-import com.example.mypetcafeui.R.layout;
-import com.example.mypetcafeui.R.menu;
-import com.example.mypetcafeui.R.string;
-import com.example.mypetcafeui.adapter.DrawerItemCustomAdapter;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -25,10 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.example.mypetcafeui.ActivityBlog;
+import com.example.mypetcafeui.ActivityBlogPost;
+import com.example.mypetcafeui.ActivityFindFriends;
+import com.example.mypetcafeui.ActivityMyFriends;
+import com.example.mypetcafeui.ActivityProfile;
+import com.example.mypetcafeui.R;
+import com.example.mypetcafeui.adapter.DrawerItemCustomAdapter;
 
 @SuppressWarnings("deprecation")
 public class ActivityBaseTab extends FragmentActivity {

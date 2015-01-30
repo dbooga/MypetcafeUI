@@ -1,7 +1,5 @@
 package com.example.mypetcafeui;
 
-import com.example.mypetcafeui.drawer.ActivityBase;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +7,8 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-@SuppressWarnings("deprecation")
+import com.example.mypetcafeui.drawer.ActivityBase;
+
 public class ActivityProfile extends ActivityBase {
 
 	@Override
@@ -18,36 +17,35 @@ public class ActivityProfile extends ActivityBase {
 		ViewGroup content = (ViewGroup) findViewById(R.id.content_frame);
 		getLayoutInflater().inflate(R.layout.activity_profile, content, true);
 
-        // receive the arguments from the previous Activity
-        Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            return;
-        }
+		// receive the arguments from the previous Activity
+		Bundle extras = getIntent().getExtras();
+		if (extras == null) {
+			return;
+		}
 
-        // assign the values to string-arguments
-        String name = extras.getString("name");
-        String email = extras.getString("email");
-        String phone = extras.getString("phone");
-        String address = extras.getString("address");
-        String city = extras.getString("city");
-        String state = extras.getString("state");
-        String zip = extras.getString("zip");
-        
-        TextView nameText = (TextView) findViewById(R.id.prof_name);    
-        nameText.setText(name);
-        TextView emailText = (TextView) findViewById(R.id.prof_email);      
-        emailText.setText(email);  
+		// assign the values to string-arguments
+		String name = extras.getString("name");
+		String email = extras.getString("email");
+		String phone = extras.getString("phone");
+		String address = extras.getString("address");
+		String city = extras.getString("city");
+		String state = extras.getString("state");
+		String zip = extras.getString("zip");
 
+		TextView nameText = (TextView) findViewById(R.id.prof_name);
+		nameText.setText(name);
+		TextView emailText = (TextView) findViewById(R.id.prof_email);
+		emailText.setText(email);
 
 	}
 
 	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
-        return true;
-    }
-	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_profile, menu);
+		return true;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 

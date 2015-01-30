@@ -169,6 +169,7 @@ public class ActivityBase extends Activity {
 		}
 		startActivity(intent);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+		
 
 		// Highlight the selected item, update the title, and close the drawer
 		mDrawerList.setItemChecked(position, true);
