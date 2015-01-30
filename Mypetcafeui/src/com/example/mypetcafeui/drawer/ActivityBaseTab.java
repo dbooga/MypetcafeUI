@@ -13,6 +13,7 @@ import com.example.mypetcafeui.R.id;
 import com.example.mypetcafeui.R.layout;
 import com.example.mypetcafeui.R.menu;
 import com.example.mypetcafeui.R.string;
+import com.example.mypetcafeui.adapter.DrawerItemCustomAdapter;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -51,16 +52,25 @@ public class ActivityBaseTab extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base);
 
-		mTitle = "test";
-
-		mDrawerTitles = new String[] { "Blogs", "Profile", "Post Blog",
-				"My Friends", "Find Friends" };
+		mDrawerTitles = getResources().getStringArray(R.array.nav_drawer_items);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		
+		ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
 
-		// Set the adapter for the list view
-		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.listitem_drawer, mDrawerTitles));
+		drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_blog, "Blogs");
+		drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_profile, "Profile");
+		drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_postblog,
+				"Post Blog");
+		drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_myfriends,
+				"My Friends");
+		drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_findfriends,
+				"Find Friends");
+
+		DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this,
+				R.layout.listitem_drawer, drawerItem);
+
+		mDrawerList.setAdapter(adapter);
 		// Set the list's click listener
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -124,6 +134,7 @@ public class ActivityBaseTab extends FragmentActivity {
 		case R.id.post_blog:
 			Intent intent = new Intent(this, ActivityBlogPost.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			return true;
 
 		default:

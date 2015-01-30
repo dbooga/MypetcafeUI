@@ -1,19 +1,6 @@
 package com.example.mypetcafeui.drawer;
 
 // Drawer base for for all activities extending it
-import com.example.mypetcafeui.ActivityBlog;
-import com.example.mypetcafeui.ActivityBlogPost;
-import com.example.mypetcafeui.ActivityFindFriends;
-import com.example.mypetcafeui.ActivityMyFriends;
-import com.example.mypetcafeui.ActivityProfile;
-import com.example.mypetcafeui.R;
-import com.example.mypetcafeui.R.anim;
-import com.example.mypetcafeui.R.drawable;
-import com.example.mypetcafeui.R.id;
-import com.example.mypetcafeui.R.layout;
-import com.example.mypetcafeui.R.menu;
-import com.example.mypetcafeui.R.string;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,10 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.example.mypetcafeui.ActivityBlog;
+import com.example.mypetcafeui.ActivityBlogPost;
+import com.example.mypetcafeui.ActivityFindFriends;
+import com.example.mypetcafeui.ActivityMyFriends;
+import com.example.mypetcafeui.ActivityProfile;
+import com.example.mypetcafeui.R;
+import com.example.mypetcafeui.adapter.DrawerItemCustomAdapter;
 
 @SuppressWarnings("deprecation")
 public class ActivityBase extends Activity {
@@ -37,7 +31,7 @@ public class ActivityBase extends Activity {
 	private final int ACTIVITY_POSTBLOG = 2;
 	private final int ACTIVITY_MYFRIENDS = 3;
 	private final int ACTIVITY_FINDFRIENDS = 4;
-	
+
 	public String[] mDrawerTitles;
 	public DrawerLayout mDrawerLayout;
 	public ListView mDrawerList;
@@ -54,14 +48,30 @@ public class ActivityBase extends Activity {
 
 		mTitle = "test";
 
-		mDrawerTitles = new String[] { "Blogs", "Profile", "Post Blog",
-				"My Friends", "Find Friends" };
+
+		mDrawerTitles = getResources().getStringArray(R.array.nav_drawer_items);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-		// Set the adapter for the list view
-		mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-				R.layout.listitem_drawer, mDrawerTitles));
+		ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[5];
+
+		drawerItem[0] = new ObjectDrawerItem(R.drawable.ic_blog, "Blogs");
+		drawerItem[1] = new ObjectDrawerItem(R.drawable.ic_profile, "Profile");
+		drawerItem[2] = new ObjectDrawerItem(R.drawable.ic_postblog,
+				"Post Blog");
+		drawerItem[3] = new ObjectDrawerItem(R.drawable.ic_myfriends,
+				"My Friends");
+		drawerItem[4] = new ObjectDrawerItem(R.drawable.ic_findfriends,
+				"Find Friends");
+
+		DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this,
+				R.layout.listitem_drawer, drawerItem);
+
+		mDrawerList.setAdapter(adapter);
+		/*
+		 * // Set the adapter for the list view mDrawerList.setAdapter(new
+		 * ArrayAdapter<String>(this, R.layout.listitem_drawer, mDrawerTitles));
+		 */
 		// Set the list's click listener
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -74,12 +84,12 @@ public class ActivityBase extends Activity {
 
 			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
-				//getActionBar().setTitle(mTitle);
+				// getActionBar().setTitle(mTitle);
 			}
 
 			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
-				//getActionBar().setTitle(mTitle);
+				// getActionBar().setTitle(mTitle);
 			}
 		};
 
@@ -124,6 +134,7 @@ public class ActivityBase extends Activity {
 		case R.id.post_blog:
 			Intent intent = new Intent(this, ActivityBlogPost.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			return true;
 
 		default:
@@ -137,25 +148,25 @@ public class ActivityBase extends Activity {
 	private void selectItem(int position) {
 		// Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
 		Intent intent = null;
-    	switch(position){
-    	case ACTIVITY_BLOG:
-    		intent = new Intent(this, ActivityBlog.class);
-    		break;
-    	case ACTIVITY_PROFILE:
-    		intent = new Intent(this, ActivityProfile.class);
-    		break;
-    	case ACTIVITY_POSTBLOG:
-    		intent = new Intent(this, ActivityBlogPost.class);
-    		break;
-    	case ACTIVITY_MYFRIENDS:
-    		intent = new Intent(this, ActivityMyFriends.class);
-    		break;
-    	case ACTIVITY_FINDFRIENDS:
-    		intent = new Intent(this, ActivityFindFriends.class);
-    		break;
-    	default:
-    		break;
-    	}
+		switch (position) {
+		case ACTIVITY_BLOG:
+			intent = new Intent(this, ActivityBlog.class);
+			break;
+		case ACTIVITY_PROFILE:
+			intent = new Intent(this, ActivityProfile.class);
+			break;
+		case ACTIVITY_POSTBLOG:
+			intent = new Intent(this, ActivityBlogPost.class);
+			break;
+		case ACTIVITY_MYFRIENDS:
+			intent = new Intent(this, ActivityMyFriends.class);
+			break;
+		case ACTIVITY_FINDFRIENDS:
+			intent = new Intent(this, ActivityFindFriends.class);
+			break;
+		default:
+			break;
+		}
 		startActivity(intent);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
@@ -168,7 +179,7 @@ public class ActivityBase extends Activity {
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
-		//getActionBar().setTitle(mTitle);
+		// getActionBar().setTitle(mTitle);
 	}
 
 	private class DrawerItemClickListener implements

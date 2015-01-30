@@ -55,6 +55,7 @@ public class ActivityProfile extends ActivityBase {
 		case R.id.edit:
 			Intent intent = new Intent(this, ActivityEditProfile.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			return true;
 
 		default:

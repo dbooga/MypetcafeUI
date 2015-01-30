@@ -20,7 +20,7 @@ public class ActivityBlog extends ActivityBaseTab implements
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	// Tab titles
-	private String[] tabs = { "Blog 1", "Blog 2", "Blog 3" };
+	private String[] tabs = { "Stories", "Experiences", "News", "Wiki"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
